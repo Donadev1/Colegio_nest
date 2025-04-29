@@ -54,7 +54,9 @@ export class AcudienteRepository {
 
     async DeleteAcudiente(id_Acudiente: number): Promise<boolean> {
         const sql = 'DELETE FROM ACUDIENTES WHERE id_Acudiente = ?';
-        const result = await this.databaseService.query(sql, [id_Acudiente]);
+        const result:any = await this.databaseService.query(sql, [id_Acudiente]);
+        console.log(result);
+        console.log(id_Acudiente);
         return result.affectedRows > 0;
     }
 }

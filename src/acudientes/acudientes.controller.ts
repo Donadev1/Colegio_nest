@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, HttpException, HttpStatus } from '@nestjs/common';
 import { AcudientesService } from './acudientes.service';
 import { CreateAcudienteDto } from './DTO/create.Acudiente.dto';
 import { Acudiente } from './entity/Acudiente.Entity';
@@ -28,7 +28,20 @@ export class AcudientesController {
     }
 
     @Delete(':id_Acudiente')
-    async DeleteAcudiente(id_Acudiente:number): Promise<boolean>{
-    return this.acudienteService.DeleteAcudiente(+id_Acudiente);
+    async DeleteAcudiente(@Param('id_Acudiente')id_Acudiente:string){
+    const result = await this.acudienteService.DeleteAcudiente(+id_Acudiente);
+    
+    if (!result) {
+        throw new HttpException(
+            'No se pudo eliminar el acudiente, posiblemente tiene estudiantes asociados',
+            HttpStatus.CONFLICT // 409 Conflict
+        );
+    }
+    
+    return {
+        success: true,
+        message: 'Acudiente eliminado exitosamente'
+    };
+
     }
 }

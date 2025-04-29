@@ -3,9 +3,12 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
 import { AcudientesModule } from './acudientes/acudientes.module';
+import { EstudianteService } from './estudiante/estudiante.service';
+import { EstudianteController } from './estudiante/estudiante.controller';
+import { EstudianteModule } from './estudiante/estudiante.module';
 
 @Module({
-  imports: [DatabaseModule, AcudientesModule],
+  imports: [DatabaseModule, AcudientesModule, EstudianteModule],
   controllers: [AppController],
   providers: [AppService],
 })
