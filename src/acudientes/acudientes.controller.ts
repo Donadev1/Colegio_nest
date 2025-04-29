@@ -9,8 +9,18 @@ export class AcudientesController {
     constructor(private readonly acudienteService: AcudientesService){}
 
     @Post()
-    async CreateAcudientes(@Body() createacudienteDto: CreateAcudienteDto): Promise<Acudiente>{
-        return await this.acudienteService.createAcudiente(createacudienteDto);
+    async CreateAcudientes(@Body() createacudienteDto: CreateAcudienteDto){
+        const result =  this.acudienteService.createAcudiente(createacudienteDto);
+       
+        if (!result) {
+            throw new HttpException(
+                'No se pudo crear el nuevo acudiente',
+                HttpStatus.CONFLICT
+            );
+        }
+        return{
+            message: 'Acudiente creado Exitosamente'
+        }
     }
 
     @Get()
@@ -23,8 +33,20 @@ export class AcudientesController {
         return this.acudienteService.getAcudiente(+id_Acudiente);
     }
     @Put(':id_Acudiente')
-    async UpdateAcudiente(@Param('id_Acudiente') id_Acudiente:string, @Body()data:UpdateAcudienteDto): Promise<boolean>{
-        return this.acudienteService.UpdateAcudiente(+id_Acudiente, data);
+    async UpdateAcudiente(@Param('id_Acudiente') id_Acudiente:string, @Body()data:UpdateAcudienteDto){
+        const result = this.acudienteService.UpdateAcudiente(+id_Acudiente, data);
+        
+        if (!result) {
+            throw new HttpException(
+                'No se pudo Actulizar el los datos del acudiente',
+                HttpStatus.CONFLICT
+            );
+        }
+        return{
+            success:true,
+            message: 'Acudiente actulizado Exitosamente',
+            
+        }
     }
 
     @Delete(':id_Acudiente')
