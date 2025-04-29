@@ -9,16 +9,16 @@ export class EstudianteRepository{
     constructor(private readonly databaseService: DatabaseService){}
 
     async CreateStudent(data:CreateEstudianteDto): Promise<Estudiante> {
-        const sql = 'INSERT INTO Estudiantes (nombre, D_Identidad, Grado, telefono, Direccion, id_Acudiente, correo_electronico ) VALUES (?, ?, ?, ?, ?, ?, ?)';
+        const sql = 'INSERT INTO Estudiantes (id_usuario, id_curso, telefono, direccion, id_acudiente) VALUES (?, ?, ?, ?, ?)';
         const result = await this.databaseService.query(sql, [
-            data.nombre, data.D_Identidad,data.Grado,data.telefono,data.id_Acudiente,data.correo_electronico
+            data.id_usuario, data.id_curso, data.telefono,data.direccion,data.id_acudiente
         ]);
 
         const insertId = result.insertId;
         return {
             id_Estudiante: insertId,
             ...data,
-        };
+        } as Estudiante;
     }
     async GetAllStudents():Promise<Estudiante[]>{
         const sql = 'SELECT * FROM Estudiantes';
@@ -37,15 +37,13 @@ export class EstudianteRepository{
     }
 
     async UpdateStudent(id_Estudiante:number, data: UpdateStudentDto): Promise<boolean>{
-        const sql = 'UPDATE Estudiantes SET nombre = ?, D_Identidad = ?, Grado = ?, telefono = ?, Direccion = ?, id_Acudiente, correo_electronico = ? WHERE id_Estudiante = ?';
+        const sql = 'UPDATE Estudiantes SET id_usuario = ?, id_curso = ?, telefono = ?, direccion = ?, id_acudiente = ? WHERE id_estudiante = ?';
         const result = await this.databaseService.query(sql, [
-            data.nombre,
-            data.D_Identidad,
-            data.Grado,
+            data.id_usuario,
+            data.id_curso,
             data.telefono,
-            data.Direccion,
-            data.id_Acudiente,
-            data.correo_electronico,
+            data.direccion,
+            data.id_acudiente,
             id_Estudiante
         ]);
         if (!result || result.length === 0) {

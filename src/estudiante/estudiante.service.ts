@@ -17,7 +17,7 @@ export class EstudianteService {
     }
 
     async GetStudent(id_Estudiante:number): Promise<Estudiante | null >{
-        return this.studentRepository.GetStudent(id_Estudiante);
+        return await this.studentRepository.GetStudent(id_Estudiante);
     }
 
     async UpdateStudent(id_Estudiante:number ,data: UpdateStudentDto): Promise<boolean>{

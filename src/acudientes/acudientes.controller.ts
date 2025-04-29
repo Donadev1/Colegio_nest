@@ -10,7 +10,7 @@ export class AcudientesController {
 
     @Post()
     async CreateAcudientes(@Body() createacudienteDto: CreateAcudienteDto){
-        const result =  this.acudienteService.createAcudiente(createacudienteDto);
+        const result =  await this.acudienteService.createAcudiente(createacudienteDto);
        
         if (!result) {
             throw new HttpException(
@@ -30,11 +30,11 @@ export class AcudientesController {
 
     @Get(':id_Acudiente')
     async GetAcudiente(@Param('id_Acudiente') id_Acudiente:string){
-        return this.acudienteService.getAcudiente(+id_Acudiente);
+        return await this.acudienteService.getAcudiente(+id_Acudiente);
     }
     @Put(':id_Acudiente')
     async UpdateAcudiente(@Param('id_Acudiente') id_Acudiente:string, @Body()data:UpdateAcudienteDto){
-        const result = this.acudienteService.UpdateAcudiente(+id_Acudiente, data);
+        const result = await this.acudienteService.UpdateAcudiente(+id_Acudiente, data);
         
         if (!result) {
             throw new HttpException(

@@ -1,36 +1,25 @@
-import { IsString, IsEmail, MinLength, MaxLength, IsInt } from 'class-validator';
+import { IsString, IsInt,IsNotEmpty, IsOptional } from 'class-validator';
 
 export class CreateEstudianteDto {
   
-    @IsString()
-    @MinLength(0)
-    nombre: string;
-  
-    @IsString()
-    @MaxLength(10)
-    @MinLength(0)
-    D_Identidad: string;
-  
-    @IsString()
-    @MaxLength(10)
-    @MinLength(0)
-    Grado: string;
+  @IsInt()
+  @IsNotEmpty()
+  id_usuario: number;  // Relacionado con la tabla Usuarios
 
-    @IsString()
-    @MaxLength(10)
-    @MinLength(0)
-    telefono: string;
-    
-    @IsString()
-    @MinLength(0)
-    Direccion: string;
+  @IsInt()
+  @IsNotEmpty()
+  id_curso: number;  // Relacionado con la tabla Cursos
+
+  @IsString()
+  @IsNotEmpty()
+  telefono: string;
+
+  @IsString()
+  @IsNotEmpty()
+  direccion: string;
+
+  @IsInt()
+  @IsOptional()  // No siempre será necesario, puede ser nulo
+  id_acudiente?: number;  // Relacionado con la tabla Acudientes
+}
   
-    @IsInt()
-    @MaxLength(10)
-    @MinLength(0)
-    id_Acudiente: number;
-    
-    @IsEmail()
-    @MinLength(0)
-    correo_electronico: string;
-  }

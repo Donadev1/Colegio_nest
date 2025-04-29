@@ -1,8 +1,6 @@
 export class Acudiente {
-    id_Acudiente: number;
-    nombre: string;
-    D_Identidad: string;
-    telefono: string;
-    Direccion:string;
-    correo_electronico: string;
-  }
+  id_acudiente: number;
+  id_usuario: number;
+  telefono: string;
+  direccion: string;
+}

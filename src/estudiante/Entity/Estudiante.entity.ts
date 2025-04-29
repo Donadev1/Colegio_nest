@@ -1,9 +1,8 @@
 export class Estudiante{
-    id_Estudiante:number;
-    nombre: string;
-    D_Identidad: string;
-    Grado:string;
-    telefono:string;
-    id_Acudiente:number;
-    correo_electronico:string;
+    id_Estudiante: number;
+    id_usuario: number;
+    id_curso: number;
+    telefono: string;
+    direccion: string;
+    id_acudiente: number | null;
 }

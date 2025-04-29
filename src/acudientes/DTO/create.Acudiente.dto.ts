@@ -1,15 +1,10 @@
-import { IsString, IsEmail, MinLength, MaxLength } from 'class-validator';
+import { IsString, IsEmail, MinLength, MaxLength, IsInt } from 'class-validator';
 
 export class CreateAcudienteDto {
   
-  @IsString()
-  @MinLength(0)
-  nombre: string;
 
-  @IsString()
-  @MaxLength(10)
-  @MinLength(0)
-  D_Identidad: string;
+  @IsInt()
+  id_usuario: number;
 
   @IsString()
   @MaxLength(10)
@@ -18,9 +13,6 @@ export class CreateAcudienteDto {
   
   @IsString()
   @MinLength(0)
-  Direccion: string;
+  direccion: string;
 
-  @IsEmail()
-  @MinLength(0)
-  correo_electronico: string;
 }
