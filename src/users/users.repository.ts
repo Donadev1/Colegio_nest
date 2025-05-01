@@ -59,7 +59,7 @@ export class UsersRepository{
     }
 
 
-    async GetDocumentById(d_identidad:string): Promise<Usuarios | null>{
+    async GetDocumentById(d_identidad:number): Promise<Usuarios | null>{
         const sql =  'SELECT * FROM Usuarios WHERE D_Identidad = ? LIMIT 1';
         const result = await this.databaseService.query(sql, [d_identidad]);
         return result.length > 0 ? result[0] : null;
