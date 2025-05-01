@@ -27,8 +27,8 @@ export class EstudianteController {
         return await this.estudianteService.GetAllStudents();
     } 
 
-    @Get() 
-    async GetStudent(id_Estudiante:string){
+    @Get(':id_Estudiante') 
+    async GetStudent(@Param('id_Estudiante') id_Estudiante:string){
         return await this.estudianteService.GetStudent(+id_Estudiante);
     }
 
@@ -62,7 +62,7 @@ export class EstudianteController {
         
         return {
             success: true,
-            message: 'Acudiente eliminado exitosamente'
+            message: 'Estudiante eliminado exitosamente'
         };
     
     }

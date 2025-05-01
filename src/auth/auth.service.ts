@@ -9,8 +9,8 @@ import * as bcryptjs from 'bcryptjs';
 export class AuthService {
     constructor(private readonly userService:UsersService){}
 
-    async RegisterUser(d_identidad:string, data:CreateUserDto):Promise<Usuarios>{
-        const User = await this.userService.GetDocumentById(+d_identidad);
+    async RegisterUser(data:CreateUserDto):Promise<Usuarios>{
+        const User = await this.userService.GetDocumentById(+data.d_identidad);
 
         if (User) {
             throw new BadRequestException('El Usuario ya existe')
@@ -22,7 +22,7 @@ export class AuthService {
             ...data,
             contrasena: Hash,
           };
-
+          console.log(newUser);
           return await this.userService.createUser(newUser);
     }
 }

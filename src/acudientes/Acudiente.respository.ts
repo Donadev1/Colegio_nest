@@ -11,14 +11,16 @@ export class AcudienteRepository {
     async createAcudiente(data: CreateAcudienteDto): Promise<Acudiente> {
         const sql = 'INSERT INTO Acudientes (id_usuario, telefono, direccion) VALUES (?, ?, ?)';
         const result = await this.databaseService.query(sql, [
-            data.id_usuario, data.telefono, data.telefono, data.direccion
+            data.id_usuario, data.telefono, data.direccion
         ]);
+        console.log(result)
     
         const insertId = result.insertId;
         return {
             id_acudiente: insertId,
             ...data,
         };
+        
     }
 
     async GetAllacudientes(): Promise<Acudiente[]> {
