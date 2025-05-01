@@ -3,14 +3,23 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
 import { AcudientesModule } from './acudientes/acudientes.module';
-import { EstudianteService } from './estudiante/estudiante.service';
-import { EstudianteController } from './estudiante/estudiante.controller';
 import { EstudianteModule } from './estudiante/estudiante.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { ConfigModule } from '@nestjs/config';
+
 
 @Module({
-  imports: [DatabaseModule, AcudientesModule, EstudianteModule, AuthModule, UsersModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal:true
+    }),
+    DatabaseModule, 
+    AcudientesModule, 
+    EstudianteModule,
+    AuthModule, 
+    UsersModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
