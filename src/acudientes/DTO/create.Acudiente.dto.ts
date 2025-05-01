@@ -1,4 +1,4 @@
-import { IsString, IsEmail, MinLength, MaxLength, IsInt } from 'class-validator';
+import { IsString, MinLength, MaxLength, IsInt } from 'class-validator';
 
 export class CreateAcudienteDto {
   

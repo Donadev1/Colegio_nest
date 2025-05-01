@@ -55,7 +55,7 @@ export class EstudianteController {
     
         if (!result) {
             throw new HttpException(
-                'No se pudo eliminar el estudiante, posiblemente tiene estudiantes asociados',
+                'No se pudo eliminar el estudiante, posiblemente tiene Acudientes asociados',
                 HttpStatus.CONFLICT // 409 Conflict
             );
         }

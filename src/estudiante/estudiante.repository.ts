@@ -54,7 +54,7 @@ export class EstudianteRepository{
     }
 
     async DeleteStudent(id_Estudiante:number): Promise<boolean>{
-        const sql = 'DELETE * FROM Estudiantes WHERE id_Estudiante = ?';
+        const sql = 'DELETE FROM Estudiantes WHERE id_Estudiante = ?';
         const result = await this.databaseService.query(sql, [id_Estudiante]);
         return result.affectedRows > 0;
     }
