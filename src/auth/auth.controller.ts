@@ -1,7 +1,8 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from 'src/users/dto/create.user.dto';
 import { LoginDto } from './dto/login.dto';
+
 
 @Controller('auth')
 export class AuthController {
@@ -16,5 +17,12 @@ export class AuthController {
     async LoginUser(@Body() data:LoginDto){
         return await this.authService.LoginUser(data)
     }
-    
+
+ 
+    @Get('protegido')
+    getProtegido() {
+    return 'Acceso permitido';
+    }
+
 }
+

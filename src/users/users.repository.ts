@@ -1,8 +1,9 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { DatabaseService } from "src/database/database.service";
 import { CreateUserDto } from "./dto/create.user.dto";
 import { Usuarios } from "./model/user.model";
 import { UpdateUserDto } from "./dto/update.user.dto";
+import { error } from "console";
 
 
 @Injectable()
@@ -59,9 +60,20 @@ export class UsersRepository{
     }
 
 
-    async GetDocumentById(d_identidad:number): Promise<Usuarios | null>{
-        const sql =  'SELECT * FROM Usuarios WHERE D_Identidad = ? LIMIT 1';
-        const result = await this.databaseService.query(sql, [d_identidad]);
+    async GetDocumentById(correo:string): Promise<Usuarios | null>{
+        const sql =  'SELECT * FROM Usuarios WHERE correo = ?';
+        const result = await this.databaseService.query(sql, [correo]);
         return result.length > 0 ? result[0] : null;
+    }
+    
+    async GetById(id_usuario:number): Promise<Usuarios>{
+        const sql = 'SELECT * FROM Usuarios WHERE id_usuario = ?';
+        const result = await this.databaseService.query(sql, [id_usuario]);
+    
+        if (result.length === 0) {
+            throw new NotFoundException(`Usuario con ID ${id_usuario} no encontrado`);
+        }
+    
+        return result[0];
     }
 }
