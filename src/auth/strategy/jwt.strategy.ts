@@ -13,7 +13,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: any) {
-    // 👇 Aquí puedes retornar todo lo que necesitas que esté en req.user
     return {
         
         correo: payload.correo,

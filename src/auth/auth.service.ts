@@ -44,7 +44,7 @@ export class AuthService {
             throw new UnauthorizedException("Contraseña incorrecta")
         }
     
-        // ✅ Aquí incluyes el id_usuario en el payload
+        
         const payload = {
             identificacion: data.correo,
             rol:User.rol
@@ -54,6 +54,7 @@ export class AuthService {
     
         return {
             token,
+            rol: User.rol,
             message: 'Inicio de sesion exitoso',
         };
     }
