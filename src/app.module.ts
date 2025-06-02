@@ -7,6 +7,7 @@ import { EstudianteModule } from './estudiante/estudiante.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
+import { CursosModule } from './cursos/cursos.module';
 
 
 @Module({
@@ -18,7 +19,7 @@ import { ConfigModule } from '@nestjs/config';
     AcudientesModule, 
     EstudianteModule,
     AuthModule, 
-    UsersModule
+    UsersModule, CursosModule
   ],
   controllers: [AppController],
   providers: [AppService],

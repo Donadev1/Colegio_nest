@@ -1,13 +1,13 @@
 import { Injectable, Param } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import * as mysql from 'mysql2/promise';
+import { Pool } from 'pg';
 
 @Injectable()
 export class DatabaseService {
-    private pool: mysql.Pool;
+    private pool: Pool;
 
     constructor(private configService: ConfigService){
-        this.pool = mysql.createPool({
+        this.pool = new Pool({
             host: this.configService.get<string>('DB_HOST'),
             user: this.configService.get<string>('DB_USER'),
             password: this.configService.get<string>('DB_PASSWORD'),
@@ -19,10 +19,11 @@ export class DatabaseService {
     }
 
     async query(sql:string, params: any[]): Promise<any>{
-        const [rows] = await this.pool.execute(sql,params);
-        return rows;
+        const result = await this.pool.query(sql,params);
+        return result.rows;
     }
 }
+
 
 
 

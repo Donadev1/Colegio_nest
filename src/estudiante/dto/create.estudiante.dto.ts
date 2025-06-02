@@ -1,25 +1,27 @@
-import { IsString, IsInt,IsNotEmpty, IsOptional } from 'class-validator';
+import { IsString, IsInt,IsNotEmpty, IsOptional, IsDate } from 'class-validator';
 
 export class CreateEstudianteDto {
   
-  @IsInt()
-  @IsNotEmpty()
-  id_usuario: number;  // Relacionado con la tabla Usuarios
+   // Relacionado con la tabla Usuarios
 
-  @IsInt()
+  @IsDate()
   @IsNotEmpty()
-  id_curso: number;  // Relacionado con la tabla Cursos
-
+  fecha_nacimiento: Date;
+    
   @IsString()
   @IsNotEmpty()
-  telefono: string;
+  grado: string;
 
-  @IsString()
+  @IsInt()
   @IsNotEmpty()
-  direccion: string;
+  id_usuario: number; 
 
   @IsInt()
   @IsOptional()  // No siempre será necesario, puede ser nulo
-  id_acudiente?: number;  // Relacionado con la tabla Acudientes
+  id_acudiente?: number;
+  
+    @IsInt()
+  @IsNotEmpty()
+  id_curso: number;  // Relacionado con la tabla cursos
 }
   

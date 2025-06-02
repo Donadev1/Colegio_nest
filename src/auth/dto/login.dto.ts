@@ -9,7 +9,7 @@ export class LoginDto{
     @IsEmail()
     correo:string;
 
-    @MaxLength(10)
+    
     @MinLength(8)
     @IsString()
     @IsNotEmpty()

@@ -25,7 +25,6 @@ export class UsersController {
     constructor(private readonly usersService:UsersService){}
     
     @UseGuards(AuthGuard, RolesGuard)
-    @Roles('Administrador')
    @Post()
    async CreateUser(@Body()createUserDto:CreateUserDto){
     const result = await this.usersService.createUser(createUserDto);

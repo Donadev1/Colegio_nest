@@ -7,6 +7,11 @@ export class CreateAcudienteDto {
   id_usuario: number;
 
   @IsString()
+  @MinLength(1)
+  @MaxLength(50)
+  nombre: string;
+  
+  @IsString()
   @MaxLength(10)
   @MinLength(0)
   telefono: string;

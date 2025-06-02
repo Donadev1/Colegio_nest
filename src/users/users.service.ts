@@ -26,7 +26,7 @@ export class UsersService {
         return await this.usersRepository.DeleteUser(id_Usuario);
     }
     async GetCorreoByStudent(correo:string):Promise<Usuarios | null>{
-        return await this.usersRepository.GetDocumentById(correo);
+        return await this.usersRepository.GetEmail(correo);
     }
 
     async GetById(id_usuario:number): Promise<Usuarios>{

@@ -3,7 +3,7 @@ import { CreateUserDto } from 'src/users/dto/create.user.dto';
 import { Usuarios } from 'src/users/model/user.model';
 import { UsersService } from 'src/users/users.service';
 
-import * as bcryptjs from 'bcryptjs';
+import * as bcrypt from 'bcrypt';
 import { LoginDto } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
 
@@ -21,24 +21,23 @@ export class AuthService {
             throw new BadRequestException('El Usuario ya existe')
         }
 
-        const Hash = await bcryptjs.hash(data.contrasena, 10);
 
         const newUser = {
             ...data,
-            contrasena: Hash,
           };
           console.log(newUser);
           return await this.userService.createUser(newUser);
     }
 
     async LoginUser(data: LoginDto): Promise<Usuarios | any> {
+        
         const User = await this.userService.GetCorreoByStudent(data.correo)
         
         if (!User) {
-            throw new UnauthorizedException('Documento es incorrecto');
+            throw new UnauthorizedException('Correo es incorrecto');
         }
     
-        const validPassword = await bcryptjs.compare(data.contrasena, User.contrasena);
+        const validPassword = await bcrypt.compare(data.contrasena, User.contrasena);
     
         if (!validPassword) {
             throw new UnauthorizedException("Contraseña incorrecta")
@@ -50,13 +49,18 @@ export class AuthService {
             rol:User.rol
         };
     
+        console.log(User);
+        
         const token = await this.jwtService.signAsync(payload);
     
         return {
             token,
             rol: User.rol,
+            nombre:User.nombre,
             message: 'Inicio de sesion exitoso',
         };
+
+        
     }
     
     

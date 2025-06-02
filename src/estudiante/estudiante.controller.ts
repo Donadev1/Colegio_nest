@@ -9,8 +9,8 @@ export class EstudianteController {
     constructor(private readonly estudianteService: EstudianteService){}
 
     @Post()
-    async CreateStudent(@Body() CreateEstudianteDto: CreateEstudianteDto){
-        const result = await this.estudianteService.CreateStudent(CreateEstudianteDto);
+    async CreateStudent(@Body() createEstudianteDto: CreateEstudianteDto){
+        const result = await this.estudianteService.CreateStudent(createEstudianteDto);
         if (!result) {
                     throw new HttpException(
                         'No se pudo crear el nuevo acudiente',

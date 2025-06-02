@@ -9,9 +9,9 @@ export class AcudienteRepository {
     constructor(private readonly databaseService: DatabaseService) {}
 
     async createAcudiente(data: CreateAcudienteDto): Promise<Acudiente> {
-        const sql = 'INSERT INTO Acudientes (id_usuario, telefono, direccion) VALUES (?, ?, ?)';
+        const sql = 'INSERT INTO acudientes (id_usuario, nombre, telefono, direccion) VALUES ($1, $2, $3, $4)';
         const result = await this.databaseService.query(sql, [
-            data.id_usuario, data.telefono, data.direccion
+            data.id_usuario, data.nombre, data.telefono, data.direccion
         ]);
         console.log(result)
     
@@ -24,14 +24,14 @@ export class AcudienteRepository {
     }
 
     async GetAllacudientes(): Promise<Acudiente[]> {
-        const sql = 'SELECT * FROM Acudientes';
+        const sql = 'SELECT * FROM acudientes';
         const result = await this.databaseService.query(sql, []);
         // Returning the results correctly without destructuring
         return result;
     }
 
     async getAcudiente(id_Acudiente: number): Promise<Acudiente | null> {
-        const sql = 'SELECT * FROM Acudientes WHERE id_Acudiente = ?';
+        const sql = 'SELECT * FROM acudientes WHERE id = $1';
         const result = await this.databaseService.query(sql, [id_Acudiente]);
 
         if (!result || result.length === 0) {
@@ -41,10 +41,11 @@ export class AcudienteRepository {
     }
 
     async UpdateAcudiente(id_Acudiente: number, data: UpdateAcudienteDto): Promise<boolean> {
-        const sql = 'UPDATE Acudientes SET id_usuario = ?, telefono = ?, direccion = ? WHERE id_acudiente = ?';
+        const sql = 'UPDATE acudientes SET id_usuario = $1, nombre = $2, telefono = $3, direccion = $4 WHERE id = $5';
         const result = await this.databaseService.query(
             sql, [
                 data.id_usuario,
+                data.nombre,
                 data.telefono,
                 data.direccion,
                 id_Acudiente
@@ -53,7 +54,7 @@ export class AcudienteRepository {
     }
 
     async DeleteAcudiente(id_Acudiente: number): Promise<boolean> {
-        const sql = 'DELETE FROM Acudientes WHERE id_Acudiente = ?';
+        const sql = 'DELETE FROM acudientes WHERE id = $1';
         const result:any = await this.databaseService.query(sql, [id_Acudiente]);
         console.log(result);
         console.log(id_Acudiente);
