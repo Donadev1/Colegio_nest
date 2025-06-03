@@ -56,7 +56,6 @@ export class AuthService {
         return {
             token,
             rol: User.rol,
-            nombre:User.nombre,
             message: 'Inicio de sesion exitoso',
         };
 

@@ -34,13 +34,13 @@ export class UsersRepository{
     }
 
     async GetUserByid(id_Usuario:number): Promise<Usuarios | null>{
-        const sql = 'SELECT * FROM usuarios WHERE id = 1$';
+        const sql = 'SELECT * FROM usuarios WHERE id = $1';
         const result = await this.databaseService.query(sql, [id_Usuario])
         return result[0]
     }
 
     async UpdateUser(id_Usuario:number, data:UpdateUserDto):Promise <boolean>{
-        const sql = 'UPDATE usuarios SET D_Identidad = $1, nombre = $2, correo = $3, contrasena = $4, rol = ? WHERE id = $5';
+        const sql = 'UPDATE usuarios SET D_Identidad = $1, nombre = $2, correo = $3, contrasena = $4, rol = $5 WHERE id = $6';
         const result = await this.databaseService.query(sql, [
             data.d_identidad, 
             data.nombre,
@@ -50,11 +50,12 @@ export class UsersRepository{
             id_Usuario
         ]);
         
-        if (!result || result.length === 0) {
+        if (result.rowCount === 0) {
             return false;
         }
 
-        return result.affectedRows > 0;
+
+        return true;
     } 
 
     async DeleteUser(id_Usuario:number): Promise<boolean>{

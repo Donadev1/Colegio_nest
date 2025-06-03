@@ -46,9 +46,7 @@ export class EstudianteRepository{
             data.id_acudiente,
             id_Estudiante
         ]);
-        if (!result || result.length === 0) {
-            return false;
-        }
+
 
         return result.affectedRows > 0;
     }
